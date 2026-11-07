@@ -1,0 +1,13 @@
+__pycache__/
+*.pyc
+.DS_Store
+node_modules/
+.env
+.env.*
+!/.env.example
+# Local build outputs
+dist/
+# Keep large master videos outside the public repository
+assets/videos/originals/
+# Keep web-ready videos versioned when uploaded
+!assets/videos/*.mp4
