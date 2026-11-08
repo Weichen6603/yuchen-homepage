@@ -1,0 +1,329 @@
+:root{--ink:#263638;--muted:#667578;--accent:#236d79;--line:#e3e9e8;--soft:#f3f7f6;--white:#fff}*{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:95px}body{margin:0;color:var(--ink);background:var(--white);font-family:Arial,Helvetica,sans-serif;font-size:15px;line-height:1.75;-webkit-font-smoothing:antialiased}a{color:var(--accent);text-decoration:none}a:hover{text-decoration:underline;text-underline-offset:4px}button{font:inherit}a:focus-visible,button:focus-visible,summary:focus-visible,video:focus-visible{outline:3px solid #4094a3;outline-offset:5px}.skip-link{position:fixed;top:8px;left:8px;z-index:50;background:var(--ink);color:white;padding:10px 15px;transform:translateY(-150%)}.skip-link:focus{transform:none}.site-header{border-bottom:1px solid var(--line);background:#fffffff5;position:sticky;top:0;z-index:10;backdrop-filter:blur(14px)}.header-inner{max-width:1160px;margin:auto;padding:0 24px;min-height:76px;display:flex;align-items:center;justify-content:space-between}.wordmark{font-size:17px;letter-spacing:-.5px;color:var(--ink);font-weight:700}.brand-dot{color:var(--accent)}.desktop-nav{display:flex;gap:30px}.desktop-nav a{color:#536568;font-size:13px}.menu-toggle,.mobile-nav{display:none}.page-layout{max-width:1160px;margin:0 auto;padding:65px 24px 0;display:grid;grid-template-columns:210px minmax(0,1fr);gap:72px}.pending-link{color:#788385;font-size:12px}.pending-link small{display:none}main{min-width:0}main:focus{outline:none}.about{padding:0 0 52px}.eyebrow{font-size:10px;font-weight:700;letter-spacing:2px;color:var(--accent);margin:0 0 18px}.about h2{font:400 38px/1.23 Georgia,"Times New Roman",serif;letter-spacing:-1px;margin:0 0 27px}.about h2 em{font-style:normal;color:var(--accent)}.about p:not(.eyebrow){color:#566569;max-width:760px;margin:0 0 17px}.about strong{color:#35494c;font-weight:600}.text-link{display:inline-flex;gap:20px;align-items:center;font-size:13px;margin-top:4px}.section-heading{display:flex;justify-content:space-between;align-items:baseline;gap:16px;border-bottom:1px solid var(--line);padding-bottom:13px;margin-bottom:26px}.section-heading h2{font-size:22px;line-height:1.3;letter-spacing:-.5px;font-weight:500;margin:0}.section-heading>span{font-size:9px;letter-spacing:1.8px;color:#758386}.project{padding-bottom:35px;margin-bottom:34px;border-bottom:1px solid var(--line)}.project:last-child{margin-bottom:44px;border-bottom:0;padding-bottom:0}.project-topline{display:flex;align-items:center;gap:10px;font-size:10px;letter-spacing:1px;color:var(--muted);margin-bottom:10px}.project-topline .tag{background:#eef5f3;border:1px solid #e1ebe8;padding:2px 7px;border-radius:3px;color:#4f746c;letter-spacing:.6px}.project h3{margin:0 0 8px;font-size:20px;font-weight:600;letter-spacing:-.5px;line-height:1.45}.project h3 a{color:var(--ink)}.project-description{margin:0 0 15px;color:#5d6d70;font-size:14px;line-height:1.7}.project-media{margin:18px 0 0}.project-media video{display:block;width:100%;aspect-ratio:16/9;background:#182127;object-fit:contain;border-radius:5px;border:1px solid #e0e7e5}.project-media figcaption{display:flex;justify-content:space-between;gap:14px;align-items:baseline;font-size:11px;color:#768285;margin-top:8px}.project-links,.publication-links{display:flex;flex-wrap:wrap;gap:18px;font-size:12px}.authors{font-size:12px;color:#6a787b;margin:10px 0}.authors summary{cursor:pointer;list-style-position:inside;color:#6b797b;font-size:11px}.authors p{margin:8px 0 0;line-height:1.8}.authors strong{color:var(--ink);font-weight:600}.publication{display:grid;grid-template-columns:52px 1fr;gap:17px;padding:0 0 25px;margin-bottom:25px;border-bottom:1px solid var(--line)}.publication:last-child{border-bottom:0;margin-bottom:0}.publication-year{font-size:12px;color:#7c8789;padding-top:3px}.publication h3{font-size:17px;line-height:1.5;margin:0 0 9px;font-weight:500}.publication h3 a{color:var(--ink)}.publication .venue{font-size:12px;color:var(--accent);margin:6px 0 10px}.publication p{margin:0 0 10px;font-size:12px;color:var(--muted)}.verification-note{font-size:11px;color:#788385}.contact-section{margin-top:40px;padding-top:8px}.contact-section p{font-size:14px;color:#647478;margin:0 0 12px}.contact-pending{font-size:12px;color:#6b797c}.contact-section small{display:block;color:#7b8688;font-size:11px;margin-top:4px}footer{margin-top:54px;padding:22px 0 30px;border-top:1px solid var(--line);display:flex;justify-content:space-between;font-size:11px;color:#7a8587}.preview-notice{text-align:center;font-size:10px;color:#758386;border-top:1px solid #eff2f1;padding:12px 20px;margin-top:5px}.video-status{font-size:11px;color:#7b5750}.video-status[hidden]{display:none}
+@media(max-width:900px){.page-layout{gap:40px;grid-template-columns:175px minmax(0,1fr);padding-top:45px}.about h2{font-size:34px}.desktop-nav{gap:22px}.section-heading>span{letter-spacing:1px}}
+@media(max-width:650px){html{scroll-padding-top:80px}.header-inner{min-height:64px;padding:0 22px}.desktop-nav{display:none}.menu-toggle{display:block;background:none;border:1px solid #d9e3e1;border-radius:3px;padding:5px 11px;color:var(--ink);font-size:12px}.mobile-nav:not([hidden]){display:flex;gap:19px;flex-wrap:wrap;padding:12px 22px 18px;font-size:12px}.page-layout{display:block;padding:30px 22px 0}.about{padding-bottom:35px}.about h2{font-size:32px;line-height:1.25;margin-bottom:21px}.about p:not(.eyebrow){font-size:14px}.section-heading h2{font-size:20px}.section-heading>span{font-size:8px;letter-spacing:.9px}.project h3{font-size:18px}.project-description{font-size:13px}.project-media figcaption{font-size:10px}.publication{grid-template-columns:38px 1fr;gap:10px}.publication h3{font-size:16px}.project-links,.publication-links{gap:15px}.contact-section{margin-top:30px}footer{margin-top:38px}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{animation:none!important;transition:none!important}}@media print{.site-header,.preview-notice,.project-media{display:none}.page-layout{display:block;padding:0}.about h2{font-size:26px}.project,.publication{break-inside:avoid}a{color:inherit}.authors{display:block}footer{margin-top:20px}}
+
+/* Profile details supplied by the owner; reference-inspired, original layout. */
+
+
+
+/* V2 — restrained research-tech visual system. */
+:root{--ink:#1d3038;--accent:#146c81;--line:#dfe8eb;--soft:#f3f8fa}
+body{background:radial-gradient(ellipse 70% 22% at 82% 8%,#eef7f9 0%,transparent 75%),#fff}
+.scroll-progress{position:fixed;top:0;left:0;right:0;height:2px;z-index:30;pointer-events:none}
+.scroll-progress span{display:block;width:100%;height:100%;background:linear-gradient(90deg,#267a8b,#73b9c6);transform:scaleX(0);transform-origin:left;will-change:transform}
+.site-header{border-bottom-color:#dce7e9;box-shadow:0 5px 25px #164b5910}
+.wordmark{letter-spacing:-.7px}.brand-dot{color:#1689a0}
+.desktop-nav a,.mobile-nav a{transition:color .2s ease}.desktop-nav a.active,.mobile-nav a.active{color:var(--accent);font-weight:700}
+.page-layout{padding-top:58px}
+.about{position:relative;isolation:isolate;padding-top:16px}
+.hero-visual{position:absolute;z-index:-1;right:-8px;top:-28px;width:min(51%,410px);height:220px;color:#5fa9b7;opacity:.46;overflow:hidden;mask-image:linear-gradient(90deg,transparent,#000 30%);pointer-events:none}
+.hero-grid{position:absolute;inset:0;background-image:linear-gradient(#83bac322 1px,transparent 1px),linear-gradient(90deg,#83bac322 1px,transparent 1px);background-size:24px 24px;transform:perspective(450px) rotateX(10deg)}
+.hero-network{position:absolute;inset:0;width:100%;height:100%;filter:drop-shadow(0 0 5px #71c5d477)}
+.visual-label{position:absolute;right:10px;bottom:5px;font:9px/1.5 monospace;letter-spacing:1px;color:#518b97}
+.eyebrow{display:flex;align-items:center;gap:10px;letter-spacing:1.7px}
+.signal-dot{width:7px;height:7px;border-radius:50%;background:#2b9fb0;box-shadow:0 0 0 4px #2b9fb018}
+.about h2{font-size:clamp(34px,4vw,47px);line-height:1.17;letter-spacing:-1.5px;position:relative}
+.about h2 em{color:#187b8e}.research-chips{display:flex;flex-wrap:wrap;gap:8px;margin:-6px 0 24px}
+.research-chips span{font:10px/1.5 monospace;letter-spacing:.1px;border:1px solid #d9e8eb;background:#f6fafb;padding:6px 9px;border-radius:4px;color:#47717b}
+.section-heading{position:relative}.section-heading:before{content:"";position:absolute;left:0;bottom:-1px;width:43px;height:2px;background:#2b8c9e}
+.section-heading>span{font-family:monospace;color:#6c8790}
+.project{position:relative;padding-left:17px;border-left:1px solid #e0e9ec;transition:border-color .2s ease}
+.project:hover{border-left-color:#3c94a5}.project-index{color:#277e90;font-family:monospace;font-size:10px;letter-spacing:1px}
+.project-topline{flex-wrap:wrap;gap:12px}.project-topline .tag{background:#eef7f9;color:#327485;border-color:#d9e9ed}
+.project h3 a:hover,.publication h3 a:hover{color:var(--accent)}
+.project-media video{border-radius:7px;border-color:#d8e5e9;box-shadow:0 8px 26px #0f394b12}
+.project-links a,.publication-links a{display:inline-flex;align-items:center;gap:5px}.project-links a:after,.publication-links a:after{content:"↗";font-size:11px;color:#7aa0a9}
+.publication{transition:background .2s ease}.publication-year{font-family:monospace;color:#367e8b}
+
+
+
+@media(max-width:900px){.hero-visual{width:45%;opacity:.3}}
+@media(max-width:650px){.page-layout{padding-top:30px}.hero-visual{width:58%;height:150px;top:0;opacity:.23}.about h2{font-size:34px}.research-chips{gap:6px}.research-chips span{font-size:9px;padding:5px 7px}.project{padding-left:12px}.visual-label{display:none}}
+@media(prefers-reduced-motion:reduce){.project,.desktop-nav a,.mobile-nav a,.publication{transition:none}}
+@media print{.scroll-progress,.hero-visual,.research-chips{display:none}}
+
+/* V3 — compact identity links and a purposeful contact destination. */
+
+
+
+
+
+
+
+
+
+
+
+.contact-section{margin-top:48px}
+.contact-panel{position:relative;display:flex;align-items:flex-end;justify-content:space-between;gap:28px;padding:32px 34px;background:linear-gradient(120deg,#f2f8fa,#f9fcfd 70%);border:1px solid #dce9ed;border-radius:12px;overflow:hidden}
+.contact-panel:after{content:"";position:absolute;width:190px;height:190px;right:-65px;top:-105px;border-radius:50%;border:1px solid #b7dce3;box-shadow:0 0 0 24px #d7edf23b,0 0 0 48px #d7edf226;pointer-events:none}
+.contact-panel-copy{position:relative;z-index:1;min-width:0}
+.contact-section .contact-kicker{display:flex;align-items:center;gap:9px;color:#3b7888;font-size:10px;letter-spacing:1.25px;font-weight:700;margin-bottom:13px}
+.contact-panel h3{font-size:27px;line-height:1.2;letter-spacing:-.9px;margin:0 0 10px;font-weight:600}
+.contact-panel p:not(.contact-kicker){max-width:480px;line-height:1.7;margin:0 0 17px;font-size:13px}
+.contact-address{font-size:14px;font-weight:600;overflow-wrap:anywhere}
+.contact-cta{position:relative;z-index:1;white-space:nowrap;display:inline-flex;align-items:center;gap:25px;background:#176b80;color:white;border-radius:7px;padding:11px 15px;font-size:12px;font-weight:600;transition:background .2s,transform .2s}
+.contact-cta:hover{background:#0d5366;color:white;text-decoration:none;transform:translateY(-2px)}
+@media(max-width:900px){.contact-panel{padding:25px;align-items:flex-start;flex-direction:column;gap:19px}}
+@media(max-width:650px){.contact-panel{padding:23px 20px}.contact-panel h3{font-size:24px}.contact-cta{width:100%;justify-content:space-between}}
+@media print{.contact-panel{background:white;border:0;padding:0}.contact-cta{display:none}}
+
+/* V4: show complete author lists without disclosure controls. */
+.project .authors{font-size:12px;line-height:1.8;color:var(--muted);margin:12px 0 16px}.project .authors strong{color:var(--ink);font-weight:650}
+
+.about a:not(.text-link){color:#137f99;text-decoration:underline;text-underline-offset:3px}
+
+/* V13 — Blue Academic Editorial. Deliberately no generic AI illustration. */
+:root{--ink:#142d4e;--muted:#596c80;--accent:#245ba8;--line:#dce6f1;--soft:#f1f6fc}
+body{background:#fff;color:var(--ink)}
+.site-header{background:#ffffffed;border-bottom:1px solid #e1e9f3;box-shadow:none}
+.wordmark{color:#142d4e}.brand-dot{color:#245ba8}
+.desktop-nav a,.mobile-nav a{color:#5c6f85}.desktop-nav a.active,.mobile-nav a.active{color:#245ba8}
+.scroll-progress span{background:#245ba8}
+.page-layout{grid-template-columns:205px minmax(0,1fr);gap:70px}
+
+
+
+
+
+.about{padding-top:20px;padding-bottom:66px}.about .eyebrow{display:block;color:#245ba8;font-size:11px;letter-spacing:1.5px;margin-bottom:20px}
+.about h2{font:400 clamp(31px,3.2vw,43px)/1.25 Georgia,"Times New Roman",serif;letter-spacing:-1.2px;max-width:800px;margin:0 0 28px;color:#142d4e}
+.about h2 em{color:#245ba8;font-style:normal}
+.about p:not(.eyebrow){color:#465d76;max-width:730px;font-size:15px;line-height:1.85;margin-bottom:19px}
+.about strong{color:#203f68}.about a:not(.text-link){color:#245ba8}
+.text-link{color:#245ba8;font-weight:600;margin-top:10px}
+.section-heading{border-bottom:1px solid #dce6f1}.section-heading:before{background:#245ba8;width:48px}
+.section-heading h2{color:#142d4e}.section-heading>span{color:#8a9aaf}
+.project{border-left:0;padding-left:0}.project:hover{border-left:0}.project-index,.publication-year{color:#245ba8}
+.project-topline .tag{background:#f1f6fc;border-color:#dce6f1;color:#245ba8}
+.project h3 a,.publication h3 a{color:#142d4e}
+.project h3 a:hover,.publication h3 a:hover{color:#245ba8}
+.project-description,.authors,.publication p{color:#596c80}
+.project-media video{border-color:#dce6f1;box-shadow:none}
+.contact-panel{background:#f4f8fd;border-color:#dce6f1;border-radius:8px}
+.contact-panel:after{display:none}.contact-section .contact-kicker{color:#245ba8}
+.contact-cta{background:#245ba8!important}.contact-cta:hover{background:#174a8b!important}
+@media(max-width:900px){.page-layout{gap:38px;grid-template-columns:175px minmax(0,1fr)}}
+@media(max-width:650px){.page-layout{display:block}.about{padding-top:0;padding-bottom:42px}.about h2{font-size:31px}.about p:not(.eyebrow){font-size:14px}}
+
+/* V14: restrained profile links with a consistent icon/text grid */
+
+
+
+
+
+
+
+/* V15: one publications section, two featured papers followed by concise entries */
+.publication-subheading{font-size:12px;letter-spacing:.08em;color:#6b7f95;font-weight:600;margin:2.5rem 0 1.5rem;padding-top:1.3rem;border-top:1px solid #dce6f1}
+.publications-section .project:last-of-type{margin-bottom:1.6rem;padding-bottom:1.6rem;border-bottom:0}
+
+/* V16: restrained personal greeting instead of a promotional headline */
+.about h2.welcome-heading{font-family:"Segoe Print","Bradley Hand","Comic Sans MS",cursive;font-style:italic;font-weight:400;font-size:clamp(26px,3vw,36px);line-height:1.35;letter-spacing:-.5px;color:#245ba8;margin:0 0 24px;max-width:none}
+@media(max-width:650px){.about h2.welcome-heading{font-size:29px;margin-bottom:20px}}
+
+/* V17: compact academic news list */
+.news-section{margin-bottom:3.4rem;scroll-margin-top:90px}
+.news-list{list-style:none;padding:0;margin:1.25rem 0 0;display:grid;gap:0}
+.news-list li{display:flex;align-items:baseline;gap:14px;padding:13px 0;border-bottom:1px solid #e3eaf2;color:#566a7e;line-height:1.65}
+.news-list li:first-child{border-top:1px solid #e3eaf2}
+.news-dot{width:6px;height:6px;border-radius:50%;background:#2a5ea8;flex:none;transform:translateY(-2px)}
+.news-list a{color:#245ba8;font-weight:600;text-decoration:none}
+.news-list a:hover{text-decoration:underline;text-underline-offset:3px}
+
+/* V18 — concise dated research updates */
+.news-list{list-style:disc;padding-left:22px;gap:0}
+.news-list li{display:list-item;padding:11px 0 11px 4px;line-height:1.6}
+.news-list li::marker{color:#42618a;font-size:12px}
+.news-date{display:inline-block;min-width:82px;color:#66798b;font-style:italic;font-variant-numeric:tabular-nums;margin-right:12px}
+.news-date-empty{min-width:0;margin:0}
+.news-list a{font-weight:500;text-decoration:underline;text-decoration-color:#b4c9dd;text-underline-offset:3px}
+@media(max-width:600px){.news-date{min-width:0;margin-right:8px}.news-list li{padding:12px 0 12px 2px}}
+
+/* V19: tighten transition from About to News after removing CTA */
+.about{padding-bottom:22px}
+.news-section{margin-top:0}
+@media(max-width:650px){.about{padding-bottom:18px}}
+
+/* V20: fixed date column and hanging alignment for wrapped news descriptions */
+.news-list{list-style:none;padding-left:0}
+.news-list li{display:grid;grid-template-columns:10px 92px minmax(0,1fr);column-gap:15px;align-items:start;padding:12px 0;line-height:1.6}
+.news-list li::before{content:"";display:block;width:6px;height:6px;background:#42618a;border-radius:50%;margin-top:.78em}
+.news-list li::marker{content:""}
+.news-date{display:block;min-width:0;margin:0;white-space:nowrap}
+.news-list li>span:last-child{min-width:0}
+@media(max-width:600px){.news-list li{grid-template-columns:8px 70px minmax(0,1fr);column-gap:9px}.news-date{font-size:.88em}}
+
+/* V21: identical fixed icon column and text baseline for all sidebar links. */
+
+
+
+
+
+
+
+/* V22 — featured papers: compact media-left editorial rows */
+.featured-paper .project-layout{display:grid;grid-template-columns:minmax(220px,38%) minmax(0,1fr);gap:28px;align-items:start}
+.featured-paper .project-media{grid-column:1;grid-row:1;margin:2px 0 0;min-width:0}
+.featured-paper .project-copy{grid-column:2;grid-row:1;min-width:0}
+.featured-paper .project-media video{aspect-ratio:16/9;object-fit:cover}
+.featured-paper .project-media figcaption{font-size:10px;margin-top:6px}
+.featured-paper .project-description{font-size:13px;line-height:1.6;margin-bottom:9px}
+.featured-paper h3{font-size:19px;line-height:1.4}
+.featured-paper .project-topline{margin-bottom:8px}
+.featured-paper .project-links{gap:10px 15px}
+.featured-paper .authors{line-height:1.55}
+@media(max-width:900px){.featured-paper .project-layout{grid-template-columns:minmax(180px,40%) minmax(0,1fr);gap:18px}}
+@media(max-width:700px){.featured-paper .project-layout{display:flex;flex-direction:column;gap:12px}.featured-paper .project-copy{order:1}.featured-paper .project-media{order:2;width:100%}}
+
+/* V23: use the same media-left composition for CRIS-0 */
+.compact-project .project-layout{display:grid;grid-template-columns:minmax(220px,38%) minmax(0,1fr);gap:28px;align-items:start}
+.compact-project .project-media{grid-column:1;grid-row:1;margin:2px 0 0;min-width:0}
+.compact-project .project-copy{grid-column:2;grid-row:1;min-width:0}
+.compact-project .project-media video{aspect-ratio:16/9;object-fit:cover}
+.compact-project .project-media figcaption{font-size:10px;margin-top:6px}
+.compact-project .project-description{font-size:13px;line-height:1.6;margin-bottom:9px}
+.compact-project h3{font-size:19px;line-height:1.4}
+.compact-project .project-topline{margin-bottom:8px}
+.compact-project .project-links{gap:10px 15px}
+.compact-project .authors{line-height:1.55}
+@media(max-width:900px){.compact-project .project-layout{grid-template-columns:minmax(180px,40%) minmax(0,1fr);gap:18px}}
+@media(max-width:700px){.compact-project .project-layout{display:flex;flex-direction:column;gap:12px}.compact-project .project-copy{order:1}.compact-project .project-media{order:2;width:100%}}
+
+/* V24: align location and social links on the same icon/text columns. */
+
+
+
+
+
+
+/* V25: same row geometry for location and all links, independent of SVG paths. */
+
+
+
+
+
+
+
+
+
+/* V26 — warmer blue editorial palette and extremely restrained star field */
+:root{--ink:#21344e;--muted:#607087;--accent:#3766ae;--line:#e3e9f0;--soft:#f5f7fb}
+html{background:#fcfbfa}
+body{background:transparent!important;color:var(--ink);position:relative;isolation:isolate}
+body::before{
+ content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;
+ background:
+ radial-gradient(ellipse 60% 40% at 92% 8%,rgba(214,226,249,.32),transparent 85%),
+ radial-gradient(ellipse 45% 42% at 4% 84%,rgba(243,224,213,.21),transparent 90%),
+ radial-gradient(circle at 8% 12%,rgba(70,111,172,.30) 0 1px,transparent 1.7px),
+ radial-gradient(circle at 23% 35%,rgba(70,111,172,.21) 0 .8px,transparent 1.5px),
+ radial-gradient(circle at 48% 16%,rgba(70,111,172,.24) 0 1px,transparent 1.7px),
+ radial-gradient(circle at 71% 25%,rgba(70,111,172,.25) 0 1px,transparent 1.7px),
+ radial-gradient(circle at 92% 45%,rgba(70,111,172,.24) 0 1px,transparent 1.7px),
+ radial-gradient(circle at 16% 67%,rgba(70,111,172,.20) 0 .8px,transparent 1.5px),
+ radial-gradient(circle at 56% 79%,rgba(70,111,172,.25) 0 1px,transparent 1.7px),
+ radial-gradient(circle at 85% 88%,rgba(70,111,172,.20) 0 .8px,transparent 1.5px);
+}
+.site-header{background:rgba(252,251,250,.91)!important}
+.about a,.news-list a{color:#3766ae}
+.news-list a:hover{color:#244f93}
+.section-heading:before{background:#4779bd}
+
+.project-topline .tag{background:#f2f5fa;border-color:#e1e9f2;color:#426b9f}
+@media(prefers-reduced-motion:reduce){body::before{background-attachment:initial}}
+@media print{body::before{display:none}}
+
+/* V27: white + neutral ink; remove blue and tinted gradients. */
+:root{--ink:#202124!important;--muted:#60646a!important;--accent:#292d33!important;--line:#e8e8e8!important;--soft:#f8f8f8!important;--white:#fff!important}
+html,body{background:#fff!important;color:#202124!important}
+body::before{background:
+ radial-gradient(circle at 8% 12%,rgba(40,44,50,.13) 0 0.8px,transparent 1.5px),
+ radial-gradient(circle at 23% 35%,rgba(40,44,50,.10) 0 0.8px,transparent 1.5px),
+ radial-gradient(circle at 48% 16%,rgba(40,44,50,.11) 0 0.8px,transparent 1.5px),
+ radial-gradient(circle at 71% 25%,rgba(40,44,50,.12) 0 0.8px,transparent 1.5px),
+ radial-gradient(circle at 92% 45%,rgba(40,44,50,.11) 0 0.8px,transparent 1.5px),
+ radial-gradient(circle at 16% 67%,rgba(40,44,50,.09) 0 0.8px,transparent 1.5px),
+ radial-gradient(circle at 56% 79%,rgba(40,44,50,.11) 0 0.8px,transparent 1.5px),
+ radial-gradient(circle at 85% 88%,rgba(40,44,50,.10) 0 0.8px,transparent 1.5px)
+ !important}
+.site-header{background:rgba(255,255,255,.96)!important;border-color:#e8e8e8!important}
+a,.about a,.news-list a,.desktop-nav a.active,.mobile-nav a.active,.project-links a,.publication-links a{color:#30343a!important}
+a:hover,.about a:hover,.news-list a:hover{color:#111!important}
+.about p:not(.eyebrow),.project-description,.authors,.news-list,.publication p{color:#53585e!important}
+.about strong,.authors strong,.about h2,.section-heading h2,.project h3 a,.publication h3 a{color:#202124!important}
+.about h2 em,.brand-dot,.eyebrow,.signal-dot{color:#30343a!important}
+.signal-dot{background:#555!important;box-shadow:0 0 0 4px #eee!important}
+.section-heading::before,.section-heading:before,.scroll-progress span{background:#444!important}
+.project-topline .tag,.research-chips span{background:#f7f7f7!important;border-color:#e8e8e8!important;color:#555!important}
+.preview-film span{background:#30343a!important}
+.news-list a{text-decoration-color:#777!important}
+a:focus-visible,button:focus-visible{outline-color:#777!important}
+
+/* V28: a single panoramic twilight signature, with untouched black-and-white content. */
+.twilight-banner{height:164px;width:100%;background-image:url("assets/twilight-banner.webp");background-size:cover;background-position:center 50%;border-bottom:1px solid #e8e8e8}
+.page-layout{padding-top:48px!important}
+@media(max-width:900px){.twilight-banner{height:136px}}
+@media(max-width:650px){.twilight-banner{height:95px;background-position:center 55%}.page-layout{padding-top:30px!important}}
+@media print{.twilight-banner{display:none}}
+
+/* V29 — personal photography, restrained cinematic banner */
+.photo-banner{height:176px;position:relative;overflow:hidden;background:#131922;border-bottom:1px solid #e8e8e8}
+.photo-slides,.photo-slide{position:absolute;inset:0;width:100%;height:100%}
+.photo-slide{object-fit:cover;object-position:center 52%;opacity:0;transition:opacity 1.25s ease;pointer-events:none}
+.photo-slide.is-active{opacity:1}
+.photo-banner:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 70%,rgba(0,0,0,.24));pointer-events:none}
+.photo-controls{position:absolute;z-index:2;bottom:11px;left:50%;transform:translateX(-50%);display:flex;align-items:center;gap:12px;opacity:.76;transition:opacity .2s}
+.photo-banner:hover .photo-controls,.photo-banner:focus-within .photo-controls{opacity:1}
+.photo-arrow{appearance:none;border:0;background:rgba(15,19,26,.25);color:#fff;width:24px;height:24px;border-radius:50%;font-size:21px;line-height:20px;cursor:pointer}
+.photo-dots{display:flex;align-items:center;gap:9px}
+.photo-dot{width:6px;height:6px;border:0;border-radius:50%;padding:0;background:rgba(255,255,255,.52);cursor:pointer}
+.photo-dot.is-active{background:#fff;box-shadow:0 0 0 2px rgba(255,255,255,.3)}
+.photo-arrow:focus-visible,.photo-dot:focus-visible{outline:2px solid #fff;outline-offset:4px}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+@media(max-width:900px){.photo-banner{height:140px}}
+@media(max-width:650px){.photo-banner{height:108px}.photo-controls{bottom:8px}.page-layout{padding-top:30px!important}}
+@media(prefers-reduced-motion:reduce){.photo-slide{transition:none}}
+@media print{.photo-banner{display:none}}
+
+/* V30 actual portrait; preserve sidebar layout. */
+
+
+
+
+
+
+/* V39: editorial wordmark and understated navigation */
+.site-header .header-inner{min-height:76px}
+.site-header .wordmark{
+  display:inline-flex;align-items:baseline;gap:0;
+  font-family:Georgia,"Times New Roman",serif;
+  font-size:23px;font-weight:700;letter-spacing:-1.05px;
+  line-height:1.15;color:#222428!important;text-decoration:none!important;
+  position:relative;padding:5px 0;
+}
+.site-header .wordmark .brand-dot{color:#222428!important}
+.site-header .wordmark::after{
+  content:"";position:absolute;left:0;bottom:0;width:0;height:1px;
+  background:#555;transition:width .25s ease;
+}
+.site-header .wordmark:hover::after,.site-header .wordmark:focus-visible::after{width:100%}
+.site-header .desktop-nav{gap:34px;align-items:center}
+.site-header .desktop-nav a{font-size:13px;font-weight:400;letter-spacing:.02em;color:#4c4f53!important;text-decoration:none!important;position:relative;padding:7px 0}
+.site-header .desktop-nav a.active{font-weight:600;color:#202124!important}
+.site-header .desktop-nav a::after{content:"";position:absolute;bottom:3px;left:0;right:0;height:1px;background:#303236;transform:scaleX(0);transform-origin:left;transition:transform .2s}
+.site-header .desktop-nav a:hover::after,.site-header .desktop-nav a:focus-visible::after{transform:scaleX(1)}
+.about .welcome-heading{font-size:38px;letter-spacing:0}
+@media(max-width:650px){.site-header .wordmark{font-size:21px}.site-header .header-inner{min-height:64px}}
+@media(prefers-reduced-motion:reduce){.site-header .wordmark::after,.site-header .desktop-nav a::after{transition:none}}
+
+/* V41 — SF-style typography for header only; main content untouched */
+.site-header .wordmark,.site-header .desktop-nav a,.site-header .mobile-nav a,.site-header .menu-toggle{
+ font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","SF Pro Text","Segoe UI",Arial,sans-serif!important;
+}
+.site-header .wordmark{font-weight:700;letter-spacing:-.65px;font-size:22px}
+.site-header .desktop-nav a{letter-spacing:0;font-size:13px}
+/* Keep media controls within the existing compact featured-publication grid. */
+.project-media video{display:block;width:100%;height:auto;aspect-ratio:16/9;object-fit:cover;border-radius:8px;background:#151515}
+.project-media video:focus-visible{outline:2px solid #555;outline-offset:3px}

@@ -1,0 +1,113 @@
+{
+  "name": "Yuchen Yan",
+  "content_confirmed": false,
+  "email": "yuchen6603@gmail.com",
+  "links": {
+    "GitHub": "",
+    "Google Scholar": "https://scholar.google.com/citations?user=iIb5qEMAAAAJ&hl=en",
+    "LinkedIn": "https://www.linkedin.com/in/yuchen-yan-abc"
+  },
+  "cv_url": "",
+  "publications": [
+    {
+      "title": "Causally Debiased Latent Action Model for Embodied Action-Conditioned World Models",
+      "authors": "Yufan Wei, Kun Zhou, Lingjun Mao, Ziming Xu, Shuang Liang, Zijun Zhang, Ziqiao Xi, Ruobing Han, Yuchen Yan, Xinyue Wang, Fan Feng, Biwei Huang",
+      "venue": "arXiv preprint · arXiv:2607.09185",
+      "year": "2026",
+      "links": {
+        "Paper": "https://arxiv.org/abs/2607.09185"
+      }
+    },
+    {
+      "title": "CausalWM: Causal Chain-of-Thought Reasoning for Embodied World Model",
+      "authors": "Ziming Xu, Shuang Liang, Ruobing Han, Ziqiao Xi, Mingxing Rao, Kun Zhou, Zijun Zhang, Yuchen Yan, Yufan Wei, Junbo Huang, Yifei Shao, Fang Nan, Biwei Huang",
+      "venue": "arXiv preprint · arXiv:2609.23184",
+      "year": "2026",
+      "links": {
+        "Paper": "https://arxiv.org/abs/2609.23184"
+      }
+    },
+    {
+      "title": "Rethinking Human Evaluation Protocol for Text-to-Video Models: Enhancing Reliability, Reproducibility, and Practicality",
+      "authors": "Tianle Zhang, Langtian Ma, Yuchen Yan, Yuchen Zhang, Kai Wang, Yue Yang, Ziyao Guo, Wenqi Shao, Yang You, Yu Qiao, Ping Luo, Kaipeng Zhang",
+      "venue": "NeurIPS 2024",
+      "year": "2024",
+      "links": {
+        "Paper": "https://arxiv.org/abs/2406.08845",
+        "Conference": "https://neurips.cc/virtual/2024/poster/96946",
+        "Project": "https://ztlmememe.github.io/T2VHE.github.io/",
+        "Code": "https://github.com/ztlmememe/T2VHE"
+      }
+    },
+    {
+      "title": "Multi-View Spectrogram Transformer for Respiratory Sound Classification",
+      "authors": "Wentao He, Yuchen Yan, Jianfeng Ren, Ruibin Bai, Xudong Jiang",
+      "venue": "ICASSP 2024 · pp. 8626–8630",
+      "year": "2024",
+      "links": {
+        "Paper": "https://arxiv.org/abs/2311.09655",
+        "IEEE": "https://ieeexplore.ieee.org/abstract/document/10445825",
+        "Code": "https://github.com/wentaoheunnc/MVST"
+      }
+    }
+  ],
+  "experience": [],
+  "preferred_domain": "yuchen.ai",
+  "projects": [
+    {
+      "name": "Video2World",
+      "subtitle": "Benchmarking Coding Agents for Interactive World Modeling from Embodied Videos",
+      "year": "2026",
+      "venue": "arXiv preprint",
+      "authors": "Jinzhou Tang, Zijun Zhang, Jing Yang, Yuchen Yan, Kun Zhou, Lingjun Mao, Ruobing Han, Jinglin Cao, Wenpeng Xu, Lukun He, Minghao Fu, Fan Feng, Biwei Huang",
+      "description": "From an embodied video to an interactive simulation: a benchmark for coding agents that reconstruct geometry, physical dynamics, and task behavior.",
+      "links": {
+        "Project": "https://aetherlabsai.github.io/Video2World/",
+        "Paper": "https://arxiv.org/abs/2610.04432",
+        "Code": "https://github.com/AetherLabsAI/Video2World"
+      },
+      "video_url": "https://aetherlabsai.github.io/Video2World/video/overview.mp4",
+      "poster": "assets/video2world-poster.webp",
+      "local_video": "assets/videos/video2world.mp4",
+      "category": "publication"
+    },
+    {
+      "name": "RobotAgentBench",
+      "subtitle": "Towards Open-world Robot Autonomy",
+      "year": "2026",
+      "venue": "arXiv preprint",
+      "authors": "Lingjun Mao, Jinglin Cao, Lukun He, Wenpeng Xu, Yuchen Yan, Hengyu Jin, Zijun Zhang, Jinzhou Tang, Songyao Jin, Ziche Liu, Yifei Shao, Junbo Huang, Fang Nan, Ruobing Han, Ziqiao Xi, Ziming Xu, Shuang Liang, Sibo Zhu, Wenyi Wu, Xinyue Wang, Yiming Huang, Xinkai Zou, Gao Zhu, Kun Zhou, Biwei Huang",
+      "description": "Evaluating robot agents in household environments, across task discovery, contextual reasoning, manipulation, failure recovery, and robustness.",
+      "links": {
+        "Project": "https://aetherlabsai.github.io/RobotAgentBench/",
+        "Paper": "https://arxiv.org/abs/2610.34649",
+        "Code": "https://github.com/AetherLabsAI/RobotAgentBench"
+      },
+      "video_url": "https://aetherlabsai.github.io/RobotAgentBench/assets/video/demo.mp4?v=4",
+      "poster": "assets/robotagentbench-poster.jpg",
+      "local_video": "assets/videos/robotagentbench.mp4",
+      "category": "publication"
+    },
+    {
+      "name": "CRIS-0",
+      "subtitle": "Building a Real-world Autonomous Robotic System with Causality-driven Agent and World Model",
+      "year": "2026",
+      "venue": "Aether AI · Project",
+      "authors": "Lingjun Mao, Lukun He, Jinglin Cao, Wenpeng Xu, Yuchen Yan, Yifei Shao, Junbo Huang, Fang Nan, Ruobin Han, Ziqiao Xi, Ziming Xu, Shuang Liang, Hengyu Jin, Sibo Zhu, Wenyi Wu, Jinzhou Tang, Zijun Zhang, Songyao Jin, Xinyue Wang, Kun Zhou, Biwei Huang",
+      "description": "A robotic system combining a causality-guided agent with a causal world model to track task progress, coordinate tools, and recover from disturbances in a home environment.",
+      "links": {
+        "Blog": "https://aetherlabs.ai/articles/real-world-autonomous-robotic-system-with-causality-driven-agent-and-world-model",
+        "机器之心": "https://mp.weixin.qq.com/s/lmF7cN9YymTF5ETwp1WCtg",
+        "量子位": "https://mp.weixin.qq.com/s?__biz=MzIzNjc1NzUzMw==&mid=2247931906&idx=1&sn=724d7d5fbfbfc876978f07e88b603677",
+        "TechCrunch": "https://techcrunch.com/sponsor/aether-ai/aether-ai-builds-causal-intelligence-for-the-real-world/",
+        "甲子光年": "https://mp.weixin.qq.com/s/uL8SdX26sUuPGYH41lcofA"
+      },
+      "video_url": "https://aetherlabs.ai/media/cris0/film-1080p.mp4",
+      "poster": "assets/cris0-poster.jpg",
+      "local_video": "assets/videos/cris0.mp4",
+      "category": "project"
+    }
+  ],
+  "role": "Research Scientist at Aether AI",
+  "location": "San Diego, CA, USA"
+}

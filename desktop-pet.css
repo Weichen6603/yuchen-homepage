@@ -1,0 +1,133 @@
+/* V38 — Little Yuchen, opt-in arrival in the lower sidebar whitespace.
+   The pet uses normal flow; only game targets, effects and speech are viewport overlays. */
+.pet-sidebar-slot{--pet-size:112px;--pet-gap:80px;display:block;position:relative;width:var(--portrait-width,158px);max-width:100%;margin:0;padding:var(--pet-gap) 0 42px;min-height:calc(var(--pet-size)*.822 + var(--pet-gap) + 42px)}
+.pet-sidebar-slot[hidden]{display:none!important}
+.little-pet{position:relative;left:auto;bottom:auto;margin:0 auto;width:var(--pet-size);height:calc(var(--pet-size)*.822);z-index:55;font:14px/1.5 Arial,Helvetica,sans-serif;color:#242426;isolation:isolate}
+.little-pet[hidden],.little-pet [hidden],#pet-game-layer[hidden],.pet-wake[hidden]{display:none!important}
+.pet-character{position:relative;display:block;width:100%;height:100%;margin:0;padding:0;background:none;border:0;box-shadow:none;border-radius:14px;cursor:pointer;appearance:none;touch-action:manipulation;-webkit-tap-highlight-color:transparent}
+.pet-character:focus-visible{outline:2px dashed #6b6963;outline-offset:4px}
+.pet-art{position:absolute;inset:0;left:7.5px;right:-7.5px;transform-origin:45% 95%;animation:pet-breathe 5.6s ease-in-out infinite;filter:drop-shadow(0 3px 2px #0000000b)}
+.pet-art img{position:absolute;inset:0;display:block;width:100%;height:100%;object-fit:contain;user-select:none;pointer-events:none;border:0;border-radius:0;margin:0}
+.pet-arms{transform-origin:47% 71%;animation:pet-wave 6.8s ease-in-out infinite}
+.pet-happy{opacity:0;transform:translateX(-16%)}
+.pet-whisper{position:absolute;top:calc(100% + 8px);left:6px;padding:3px 9px;white-space:nowrap;border:1px solid #ece9e4;border-radius:12px;background:#fff;color:#76716a;font-size:10px;line-height:1.7;opacity:0;transform:translateY(4px);transition:opacity .18s,transform .18s;pointer-events:none}
+.little-pet[data-state="idle"] .pet-character:hover .pet-whisper,.little-pet[data-state="idle"] .pet-character:focus-visible .pet-whisper{opacity:1;transform:none}
+.pet-hide{position:absolute;right:-3px;top:0;display:grid;place-items:center;width:22px;height:22px;border:1px solid #e8e5df;border-radius:50%;background:#fff;color:#777;font-size:17px;line-height:1;cursor:pointer;opacity:0;transition:opacity .18s}
+.little-pet:hover .pet-hide,.little-pet:focus-within .pet-hide{opacity:1}
+.pet-dialog{position:fixed;left:134px;bottom:34px;width:254px;max-width:calc(100vw - 24px);background:#fff;border:1px solid #e4e1dc;border-radius:16px;padding:18px 18px 12px;box-shadow:0 7px 30px #24221a13;z-index:4;text-align:left}
+.pet-dialog:after{content:"";position:absolute;left:-7px;bottom:24px;width:12px;height:12px;background:#fff;border:1px solid #e4e1dc;border-top:0;border-right:0;transform:rotate(45deg)}
+.pet-dialog[data-tail="bottom"]:after{left:38px;bottom:-7px;transform:rotate(-45deg)}
+.pet-dialog-kicker{display:block;color:#8b8277;font-size:9px;letter-spacing:1.5px;font-weight:600;margin-bottom:6px}
+.pet-dialog h2{font:700 21px/1.25 Arial,Helvetica,sans-serif;letter-spacing:-.5px;margin:0 0 8px;color:#242426}
+.pet-dialog p{font:400 13px/1.65 Arial,Helvetica,sans-serif;margin:0 0 14px;color:#65605a}
+.pet-dialog-close{position:absolute;right:8px;top:6px;width:27px;height:27px;border:0;background:none;color:#8b8379;font-size:21px;cursor:pointer}
+.pet-dialog-actions{display:flex;gap:8px;align-items:center}
+.pet-dialog-actions button{min-height:35px;padding:7px 13px;border-radius:8px;font:600 12px/1.4 Arial,Helvetica,sans-serif;cursor:pointer;touch-action:manipulation}
+.pet-primary{background:#272728;border:1px solid #272728;color:#fff}
+.pet-primary:hover{background:#414142}
+.pet-secondary{background:#f6f5f3;border:1px solid #eeece8;color:#625b54}
+.pet-secondary:hover{background:#eeece8}
+.pet-sleep-link{display:block;padding:0;margin:11px 0 0;background:none;border:0;color:#8d867d;font:400 10px/1.5 Arial,Helvetica,sans-serif;cursor:pointer;text-decoration:underline;text-underline-offset:3px}
+.pet-hud{position:absolute;top:calc(100% + 8px);bottom:auto;left:0;display:flex;align-items:center;justify-content:center;gap:8px;min-width:104px;height:32px;padding:4px 7px 4px 10px;background:#fff;border:1px solid #e6e3df;border-radius:20px;box-shadow:0 3px 14px #00000008;font:600 12px/1 Arial,Helvetica,sans-serif;color:#4c4842}
+.pet-hud>svg{width:14px;height:14px;fill:none;stroke:currentColor;stroke-width:1.6}
+.pet-hud>button{width:20px;height:22px;border:0;background:transparent;color:#817b73;font-size:18px;line-height:1;cursor:pointer;padding:0}
+.pet-score{white-space:nowrap;min-width:31px;text-align:center;font-variant-numeric:tabular-nums}
+#pet-game-layer,#pet-effects{position:fixed;inset:0;z-index:45;pointer-events:none;overflow:hidden}
+#pet-effects{z-index:60}
+.little-bug{position:absolute;display:grid;place-items:center;width:40px;height:40px;padding:4px;border:0;border-radius:50%;background:transparent;box-shadow:none;cursor:crosshair;pointer-events:auto;touch-action:manipulation;isolation:isolate;-webkit-tap-highlight-color:transparent}
+.little-bug>svg{width:30px;height:30px;overflow:visible;transform:rotate(var(--bug-tilt,0deg));filter:drop-shadow(0 2px 1px #00000010);transition:transform .15s}
+.little-bug:hover>svg{transform:rotate(0deg) scale(1.12)}
+.little-bug:focus-visible{outline:2px dashed #8b8174;outline-offset:0;background:#faf8f2}
+.little-bug.is-caught{pointer-events:none}
+.little-bug.is-caught>svg{animation:pet-caught .24s ease-in forwards}
+.little-pet.is-shooting .pet-arms{animation:none;transform:rotate(var(--pet-aim,-6deg)) translateX(-1px)}
+.little-pet.is-shooting .pet-art{animation:pet-recoil .25s ease-out}
+.pet-muzzle{position:absolute;top:47%;left:79%;width:7px;height:7px;border-radius:50%;background:#ffe295;opacity:0;box-shadow:0 0 0 3px #ffd67535}
+.little-pet.is-shooting .pet-muzzle{animation:pet-flash .25s ease-out}
+.little-pet[data-state="won"] .pet-body,.little-pet[data-state="won"] .pet-arms{opacity:0}
+.little-pet[data-state="won"] .pet-happy{opacity:1}
+.little-pet[data-state="won"] .pet-art{animation:pet-cheer .6s ease-out 2}
+.pet-light-dot{position:absolute;left:0;top:0;width:7px;height:7px;border-radius:50%;background:#e5b458;box-shadow:0 0 8px #efc78190;pointer-events:none}
+.pet-dust{position:absolute;width:4px;height:4px;left:0;top:0;border-radius:2px;background:#d0ad62;pointer-events:none}
+.pet-plus{position:absolute;color:#8e7342;font:600 13px/1 Arial,Helvetica,sans-serif;pointer-events:none}
+.pet-wake{font-size:11px;color:#7c756d!important;white-space:nowrap;background:none;border:0;padding:0;cursor:pointer}
+.pet-wake:hover{text-decoration:underline;text-underline-offset:3px}
+.little-pet.is-page-hidden .pet-art,.little-pet.is-page-hidden .pet-arms{animation-play-state:paused}
+@keyframes pet-breathe{0%,100%{transform:translateY(0)}50%{transform:translateY(-1.6px)}}
+@keyframes pet-wave{0%,48%,100%{transform:rotate(0)}55%{transform:rotate(-9deg)}62%{transform:rotate(2deg)}69%{transform:rotate(-7deg)}76%{transform:rotate(0)}}
+@keyframes pet-caught{to{opacity:0;transform:scale(.35) rotate(25deg)}}
+@keyframes pet-recoil{0%{transform:translate(0,0)}25%{transform:translate(-2px,1px) rotate(-1deg)}100%{transform:none}}
+@keyframes pet-flash{15%{opacity:1;transform:scale(1.3)}100%{opacity:0;transform:scale(.5)}}
+@keyframes pet-cheer{0%,100%{transform:none}45%{transform:translateY(-5px) rotate(-3deg)}}
+@media(min-width:651px) and (max-width:1200px){.pet-sidebar-slot{--pet-size:88px}.pet-hud{min-width:92px;gap:6px;padding-left:7px}}
+@media(max-width:650px){
+ .pet-sidebar-slot{--pet-size:76px;--pet-gap:48px;padding:var(--pet-gap) 0 44px;min-height:calc(var(--pet-size)*.822 + var(--pet-gap) + 44px)}
+ .pet-hud{left:0;top:calc(100% + 8px);bottom:auto;min-width:100px;height:32px}
+ .pet-hide{right:-2px;top:0;width:20px;height:20px}
+ .pet-dialog{position:fixed;width:254px;padding:17px 17px 12px}
+ .little-bug{width:44px;height:44px;padding:7px}
+}
+@media(prefers-reduced-motion:reduce){.little-pet *,#pet-game-layer *{animation:none!important;transition:none!important}.little-pet .pet-art,.little-pet .pet-arms{transform:none!important}}
+@media print{.little-pet,.pet-sidebar-slot,#pet-game-layer,#pet-effects,.pet-wake{display:none!important}}
+
+.pet-dialog[data-tail="none"]:after{display:none}
+
+/* Arrival artwork is dormant in normal use, only lasting 2.8 seconds.
+   All geometry is relative to the pet so it stays centered during scrolling. */
+.pet-delivery {position:absolute;inset:0;pointer-events:none;z-index:2;display:none;--delivery-time:2800ms;}
+.pet-portal {position:absolute;left:50%;top:-29px;width:100px;height:21px;margin-left:-50px;border:2px solid #a99073;border-radius:50%;background:radial-gradient(ellipse,#c6b6ca66 0%,#ece5df80 44%,#fff7e7 64%,#d5b789 78%,transparent 80%);box-shadow:0 0 9px 3px #d1b88b25,inset 0 0 6px #b0a1bc45;opacity:0;}
+.pet-portal-core {position:absolute;inset:3px 8px;border-radius:50%;border:1px solid #f5e4bd;}
+.pet-portal-orbit {position:absolute;inset:-5px -10px;border-radius:50%;border:1px dashed #b8a3b9;opacity:.55;}
+.pet-crane-window {position:absolute;left:-22px;right:-22px;top:-20px;bottom:-4px;overflow:hidden;}
+.pet-gripper {position:absolute;top:-8px;left:50%;margin-left:-44px;width:88px;height:82.5px;overflow:visible;filter:drop-shadow(0 2px 1px #332b2412);opacity:0;}
+.gripper-jaw-left {transform-box:view-box;transform-origin:32px 29px;}
+.gripper-jaw-right {transform-box:view-box;transform-origin:64px 29px;}
+.pet-landing-shadow {position:absolute;bottom:-2px;left:50%;margin-left:-38px;width:76px;height:7px;border-radius:50%;background:#39332e12;opacity:0;}
+.portal-speck {position:absolute;width:3px;height:3px;border-radius:50%;background:#b99b70;opacity:0;}
+.portal-speck-one {top:-23px;left:7px;--speck-x:-8px;--speck-y:-4px;}
+.portal-speck-two {top:-35px;right:17px;--speck-x:9px;--speck-y:-7px;}
+.portal-speck-three {top:-18px;right:1px;--speck-x:6px;--speck-y:8px;}
+.little-pet.is-arriving {pointer-events:none;}
+.little-pet.is-arriving .pet-delivery {display:block;}
+.little-pet.is-arriving .pet-hide,.little-pet.is-arriving .pet-whisper {visibility:hidden;}
+.little-pet.is-arriving .pet-art,.little-pet.is-arriving .pet-arms {animation:none;}
+.little-pet.is-arriving .pet-character {animation:pet-delivered 2800ms both;transform-origin:50% 100%;}
+.little-pet.is-arriving .pet-portal {animation:portal-open-close var(--delivery-time) both;}
+.little-pet.is-arriving .pet-gripper {animation:gripper-delivery var(--delivery-time) both;}
+.little-pet.is-arriving .gripper-jaw-left {animation:gripper-release-left var(--delivery-time) both;}
+.little-pet.is-arriving .gripper-jaw-right {animation:gripper-release-right var(--delivery-time) both;}
+.little-pet.is-arriving .portal-speck {animation:portal-drift var(--delivery-time) both;}
+.little-pet.is-arriving .pet-landing-shadow {animation:pet-touchdown var(--delivery-time) both;}
+@keyframes portal-open-close {
+  0% {opacity:0;transform:scale(.15,.1)}
+  12%,78% {opacity:1;transform:scale(1,1)}
+  88% {opacity:.7;transform:scale(.9,.8)}
+  100% {opacity:0;transform:scale(.05,.05)}
+}
+@keyframes gripper-delivery {
+  0%,10% {opacity:0;transform:translateY(-65px)}
+  26% {opacity:1;transform:translateY(-28px)}
+  55%,66% {opacity:1;transform:translateY(0)}
+  84% {opacity:0;transform:translateY(-74px)}
+  100% {opacity:0;transform:translateY(-74px)}
+}
+@keyframes pet-delivered {
+  0%,17% {opacity:0;transform:translateY(-28px)}
+  26% {opacity:1;transform:translateY(-28px)}
+  55%,60% {opacity:1;transform:translateY(0)}
+  65% {opacity:1;transform:translateY(1px) scaleY(.985)}
+  74%,100% {opacity:1;transform:translateY(0) scaleY(1)}
+}
+@keyframes gripper-release-left {0%,56%{transform:rotate(0)}65%,100%{transform:rotate(19deg)}}
+@keyframes gripper-release-right {0%,56%{transform:rotate(0)}65%,100%{transform:rotate(-19deg)}}
+@keyframes portal-drift {0%,8%,85%,100%{opacity:0;transform:translate(0,0)}20%{opacity:.65}70%{opacity:.25;transform:translate(var(--speck-x),var(--speck-y))}}
+@keyframes pet-touchdown {0%,24%{opacity:0;transform:scale(.5)}55%,72%{opacity:1;transform:scale(1)}100%{opacity:0;transform:scale(1)}}
+@media(max-width:1200px) {
+ .pet-art {left:6px;right:-6px;}
+ .pet-gripper {width:72px;height:67.5px;margin-left:-36px;top:-5px;}
+ .pet-portal {width:84px;height:18px;margin-left:-42px;}
+}
+@media(prefers-reduced-motion:reduce) {
+ .pet-delivery {display:none!important;}
+ .little-pet.is-arriving .pet-character {animation:none!important;transform:none!important;opacity:1;}
+}

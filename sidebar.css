@@ -1,0 +1,87 @@
+/* V38: one shared outer left edge for portrait, name, title and detail rows.
+   Detail icons live inside the sidebar, never in a negative-margin gutter. */
+.profile {
+  --portrait-width:158px;
+  --profile-icon:20px;
+  --profile-gap:10px;
+  align-self:start;
+  position:sticky;
+  top:var(--pet-profile-top,123px);
+  z-index:1;
+  min-width:0;
+  padding:0;
+  border:0;
+  text-align:left;
+}
+.portrait-photo {
+  display:block;
+  width:var(--portrait-width);
+  height:178px;
+  object-fit:cover;
+  object-position:center 38%;
+  border:1px solid #ededed;
+  border-radius:5px;
+  margin:0 0 25px;
+}
+.profile-copy {min-width:0; padding:0; margin:0;}
+.profile-kicker,.profile-live-dot,.profile-link-arrow {display:none;}
+.profile h1 {font-size:25px;line-height:1.2;letter-spacing:-1px;color:#202124;margin:0 0 10px;}
+.profile-role {font-size:13px;font-weight:600;line-height:1.6;color:#30343a;margin:0 0 16px;}
+.profile-affiliation {white-space:nowrap;text-decoration:underline;text-decoration-color:#b3b3b3;text-underline-offset:3px;text-decoration-thickness:1px;}
+.profile-affiliation:hover {text-decoration-color:currentColor;}
+.profile-location,.profile-links>a {
+  display:grid;
+  grid-template-columns:var(--profile-icon) minmax(0,1fr);
+  column-gap:var(--profile-gap);
+  align-items:center;
+  margin:0;
+  padding:8px 0;
+  width:100%;
+  min-height:44px;
+  border:0;
+  background:none;
+  border-radius:0;
+  box-shadow:none;
+  font-size:12px;
+  line-height:1.65;
+  color:#30343a;
+  text-decoration:none;
+}
+.profile-location {color:#60646a;margin-bottom:6px;}
+.profile-links {display:flex;flex-direction:column;gap:2px;width:100%;padding:0;margin:0;}
+.profile-links>a:hover {background:none;transform:none;text-decoration:underline;text-underline-offset:4px;}
+.profile-detail-icon,.profile-link-icon {display:grid;place-items:center;width:20px;height:24px;margin:0;padding:0;line-height:0;color:#383c40;}
+.profile-detail-icon svg {display:block;width:20px;height:20px;margin:0;flex:none;}
+.profile-location svg {fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round;}
+.profile-detail-text,.profile-links>a>span:last-child {display:block;min-width:0;margin:0;padding:0;line-height:24px;}
+@media(min-width:651px) and (max-width:900px) {
+  .profile {--portrait-width:145px;}
+  .portrait-photo {height:160px;}
+  .profile h1 {font-size:24px;}
+}
+@media(max-width:650px) {
+  .profile {--portrait-width:102px;position:static;display:block;margin:0 0 34px;padding:0 0 24px;border-bottom:1px solid #e8e8e8;}
+  .portrait-photo {height:122px;margin:0 0 20px;}
+  .profile h1 {font-size:24px;}
+  .profile-role {font-size:12px;margin-bottom:10px;}
+  .profile-location,.profile-links>a {min-height:40px;padding:6px 0;}
+}
+@media(max-width:360px) {
+  .profile {--portrait-width:102px;}
+  .portrait-photo {height:122px;}
+  .profile h1 {font-size:23px;}
+}
+@media print {.profile{position:static}.portrait-photo{display:none}}
+
+/* V40: typography only. Use Apple's native San Francisco where installed.
+   On Windows/Linux, system-ui is the nearest available system fallback.
+   No proprietary font files are bundled or distributed. */
+.profile h1,
+.profile .profile-role,
+.profile .profile-role a,
+.profile .profile-location,
+.profile .profile-links,
+.profile .profile-links a,
+.profile .profile-detail-text {
+  font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","SF Pro Text",system-ui,sans-serif;
+}
