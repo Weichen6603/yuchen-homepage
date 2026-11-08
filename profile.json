@@ -68,7 +68,7 @@
       },
       "video_url": "https://aetherlabsai.github.io/Video2World/video/overview.mp4",
       "poster": "assets/video2world-poster.webp",
-      "local_video": "assets/videos/video2world.mp4",
+      "local_video": "assets/videos/Video2World.mp4",
       "category": "publication"
     },
     {
@@ -85,7 +85,7 @@
       },
       "video_url": "https://aetherlabsai.github.io/RobotAgentBench/assets/video/demo.mp4?v=4",
       "poster": "assets/robotagentbench-poster.jpg",
-      "local_video": "assets/videos/robotagentbench.mp4",
+      "local_video": "assets/videos/RobotAgentBench.mp4",
       "category": "publication"
     },
     {
@@ -104,7 +104,7 @@
       },
       "video_url": "https://aetherlabs.ai/media/cris0/film-1080p.mp4",
       "poster": "assets/cris0-poster.jpg",
-      "local_video": "assets/videos/cris0.mp4",
+      "local_video": "assets/videos/CRIS-0.mp4",
       "category": "project"
     }
   ],

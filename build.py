@@ -17,7 +17,25 @@ def safe_url(value):
 def authors(value):return esc(value).replace('Yuchen Yan','<strong>Yuchen Yan</strong>')
 def links(values):
     return ''.join(f'<a href="{safe_url(url)}" target="_blank" rel="noopener noreferrer">{esc(label)}</a>' for label,url in values.items() if url)
-def build(production=False):
+def project_video_url(project, required=False):
+    local = project.get('local_video')
+    path = ROOT/local if local else None
+    if path is None or not path.is_file():
+        if required:
+            raise ValueError('Missing local video; run git lfs pull: '+str(local))
+        return safe_url(project['video_url'])
+    # Windows accepts case mismatches that would become 404s on GitHub Pages.
+    if path.name not in {entry.name for entry in path.parent.iterdir()}:
+        raise ValueError('Video filename case does not match: '+local)
+    with path.open('rb') as stream:
+        header = stream.read(64)
+    if header.startswith(b'version https://git-lfs.github.com/spec/v1'):
+        raise ValueError('LFS pointer is not a playable video; run git lfs pull: '+local)
+    if header[4:8] != b'ftyp':
+        raise ValueError('Expected an MP4 file: '+local)
+    return safe_url(local)
+
+def build(production=False, require_local_videos=False):
     d=json.loads((ROOT/'profile.json').read_text(encoding='utf-8'))
     if production and not d.get('content_confirmed'):raise ValueError('Confirm biography and all profile entries, then set content_confirmed to true.')
     if production and not d.get('email'):raise ValueError('A verified public contact email is required for production.')
@@ -28,7 +46,7 @@ def build(production=False):
     project_items=[p for p in d['projects'] if p.get('category','project')=='project']
     featured_items=[p for p in d['projects'] if p.get('category')=='publication']
     for i,p in enumerate(featured_items + project_items):
-        project_url=safe_url(p['links'].get('Project') or p['links'].get('Blog') or next(iter(p['links'].values()))); video=safe_url(p['local_video'] if p.get('local_video') and (ROOT/p['local_video']).is_file() else p['video_url']);poster=safe_url(p['poster'])
+        project_url=safe_url(p['links'].get('Project') or p['links'].get('Blog') or next(iter(p['links'].values()))); video=project_video_url(p, required=require_local_videos);poster=safe_url(p['poster'])
         target=featured if p.get('category')=='publication' else projects
         item_num=(len(featured)+1) if p.get('category')=='publication' else (len(projects)+1)
         item_label='PAPER' if p.get('category')=='publication' else 'PROJECT'
@@ -50,6 +68,10 @@ def build(production=False):
     dist=ROOT/'dist';dist.mkdir(exist_ok=True)
     for f in ('index.html','styles.css','script.js','desktop-pet.css','desktop-pet.js','sidebar.css','favicon.svg'):shutil.copyfile(ROOT/f,dist/f)
     if (ROOT/'assets').exists():shutil.copytree(ROOT/'assets',dist/'assets',dirs_exist_ok=True,ignore=shutil.ignore_patterns('originals','*original*'))
-    print('Built dist/. Missing optional local videos fall back to project-hosted URLs.')
+    print('Built dist/ with verified local videos.' if require_local_videos else 'Built dist/. Missing optional local videos fall back to project-hosted URLs.')
 if __name__=='__main__':
-    parser=argparse.ArgumentParser();parser.add_argument('--production',action='store_true');build(parser.parse_args().production)
+    parser=argparse.ArgumentParser()
+    parser.add_argument('--production',action='store_true')
+    parser.add_argument('--require-local-videos',action='store_true',help='Fail if local MP4s are missing or still LFS pointers (required for deployment).')
+    args=parser.parse_args()
+    build(args.production, args.require_local_videos)

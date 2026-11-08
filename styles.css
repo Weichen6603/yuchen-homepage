@@ -327,3 +327,46 @@ a:focus-visible,button:focus-visible{outline-color:#777!important}
 /* Keep media controls within the existing compact featured-publication grid. */
 .project-media video{display:block;width:100%;height:auto;aspect-ratio:16/9;object-fit:cover;border-radius:8px;background:#151515}
 .project-media video:focus-visible{outline:2px solid #555;outline-offset:3px}
+
+/* V42: a bounded wide-screen canvas, with research given the extra space. */
+:root{--page-width:1480px;--page-gutter:clamp(24px,3vw,48px)}
+.header-inner,.page-layout{max-width:var(--page-width);padding-left:var(--page-gutter);padding-right:var(--page-gutter)}
+.project-media video{object-fit:contain}
+.featured-paper .project-media video,.compact-project .project-media video{object-fit:contain}
+@media(min-width:901px){
+  .page-layout{grid-template-columns:210px minmax(0,1fr);gap:clamp(40px,4vw,64px)}
+  .about{padding-bottom:44px}
+  .about p:not(.eyebrow){max-width:960px;font-size:17px;line-height:1.9;margin-bottom:24px}
+  .about h2.welcome-heading{font-size:42px;margin-bottom:30px}
+  .section-heading{padding-bottom:17px;margin-bottom:34px}
+  .section-heading h2{font-size:26px}
+  .news-list li{padding:17px 0;line-height:1.8;font-size:16px}
+  .news-section{margin-bottom:64px}
+  .featured-paper .project-layout,.compact-project .project-layout{grid-template-columns:minmax(0,46fr) minmax(0,54fr);gap:32px}
+  .featured-paper h3,.compact-project h3{font-size:25px;line-height:1.35;margin-bottom:13px}
+  .featured-paper .project-description,.compact-project .project-description{font-size:15px;line-height:1.8;margin-bottom:14px}
+  .featured-paper .project-topline,.compact-project .project-topline{margin-bottom:12px}
+  .project .authors{font-size:13px;line-height:1.75;margin-top:18px}
+  .project-links,.publication-links{font-size:13px;gap:12px 20px}
+  .featured-paper .project-media figcaption,.compact-project .project-media figcaption{font-size:11px;margin-top:10px}
+  .project{padding-bottom:44px;margin-bottom:44px}
+  .publications-section .project:last-of-type{padding-bottom:36px;margin-bottom:36px}
+  .publication{grid-template-columns:56px minmax(0,1fr);gap:22px;padding-bottom:32px;margin-bottom:32px}
+  .publication h3{font-size:20px;line-height:1.55}
+  .publication p,.publication .venue{font-size:13px;line-height:1.8}
+  .research-section{margin-top:64px}
+}
+/* Stack media before the sidebar and two paper columns become cramped. */
+@media(min-width:701px) and (max-width:1100px){
+  .featured-paper .project-layout,.compact-project .project-layout{display:flex;flex-direction:column;gap:20px}
+  .featured-paper .project-copy,.compact-project .project-copy{order:1}
+  .featured-paper .project-media,.compact-project .project-media{order:2;width:100%}
+}
+@media(max-width:650px){
+  .section-heading h2{font-size:24px}
+  .featured-paper h3,.compact-project h3{font-size:22px}
+  .featured-paper .project-description,.compact-project .project-description{font-size:14px;line-height:1.75}
+  .featured-paper .project-layout,.compact-project .project-layout{gap:18px}
+  .project{padding-bottom:32px;margin-bottom:32px}
+  .research-section{margin-top:42px}
+}
