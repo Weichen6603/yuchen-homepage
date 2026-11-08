@@ -15,6 +15,36 @@ def safe_url(value):
         return esc(value)
     raise ValueError('Use an HTTPS URL or existing assets/ file: '+value)
 def authors(value):return esc(value).replace('Yuchen Yan','<strong>Yuchen Yan</strong>')
+def search_metadata(data):
+    url=data['site_url']
+    parsed=urlparse(url)
+    if parsed.scheme!='https' or not parsed.netloc or parsed.username or parsed.query or parsed.fragment or parsed.path!='/':
+        raise ValueError('site_url must be an HTTPS origin with a trailing slash.')
+    person={'@type':'Person','@id':url+'#person','name':data['name'],'url':url,
+            'image':url+'assets/portrait/portrait.webp',
+            'sameAs':[value for value in data['links'].values() if value]}
+    structured={'@context':'https://schema.org','@type':'ProfilePage','@id':url+'#profile',
+                'url':url,'name':data['name']+' | Research','mainEntity':person}
+    # JSON inside an HTML script must not be able to close the script element.
+    payload=json.dumps(structured,ensure_ascii=False).replace('<','\\u003c')
+    tags=[f'<link rel="canonical" href="{esc(url)}" />',
+          f'<meta property="og:url" content="{esc(url)}" />',
+          f'<meta property="og:image" content="{esc(url)}assets/portrait/portrait.webp" />',
+          f'<meta property="og:site_name" content="{esc(data["name"])}" />',
+          '<meta name="twitter:card" content="summary" />',
+          f'<script type="application/ld+json">{payload}</script>']
+    if data.get('google_site_verification'):
+        tags.append(f'<meta name="google-site-verification" content="{esc(data["google_site_verification"])}" />')
+    return '\n'.join(tags)
+
+def write_search_files(dist, url, production):
+    # A preview must not retain a previous production sitemap.
+    robots='User-agent: *\nAllow: /\n'
+    urls=f'  <url><loc>{esc(url)}</loc></url>\n' if production else ''
+    if production: robots+=f'\nSitemap: {url}sitemap.xml\n'
+    (dist/'robots.txt').write_text(robots,encoding='utf-8')
+    (dist/'sitemap.xml').write_text('<?xml version="1.0" encoding="UTF-8"?>\n'
+        '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'+urls+'</urlset>\n',encoding='utf-8')
 def links(values):
     return ''.join(f'<a href="{safe_url(url)}" target="_blank" rel="noopener noreferrer">{esc(label)}</a>' for label,url in values.items() if url)
 def project_video_url(project, required=False):
@@ -70,6 +100,7 @@ def build(production=False, require_local_videos=False):
     if email and not re.fullmatch(r'[A-Za-z0-9._+%-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}',email):raise ValueError('Invalid email address')
     contact=f'<a href="mailto:{esc(email)}">{esc(email)}</a>' if email else '<span class="contact-pending">Public contact details will be added shortly.</span>'
     tokens={'ROBOTS':'' if production else '<meta name="robots" content="noindex, nofollow" />','DRAFT_NOTICE':'','DESKTOP_PET':(ROOT/'templates/little-pet.html').read_text(encoding='utf-8'),'ROLE':esc(d.get('role','AI Research')).replace('Aether AI','<a class="profile-affiliation" href="https://aetherlabs.ai/" target="_blank" rel="noopener noreferrer">Aether AI</a>'),'LOCATION':esc(d.get('location','')),'SOCIALS':social,'CV':cv,'PROJECTS':''.join(projects),'FEATURED_PUBLICATIONS':''.join(featured),'PUBLICATIONS':''.join(pubs),'CONTACT':contact,'EMAIL':esc(email)}
+    tokens['SEARCH_METADATA']=search_metadata(d)
     tokens['STYLE_VERSION']=hashlib.sha256((ROOT/'styles.css').read_text(encoding='utf-8').encode('utf-8')).hexdigest()[:12]
     for token, filename in [('SCRIPT_VERSION','script.js'),('PLAYER_STYLE_VERSION','video-player.css'),('PLAYER_SCRIPT_VERSION','video-player.js')]:
         tokens[token]=hashlib.sha256((ROOT/filename).read_text(encoding='utf-8').encode('utf-8')).hexdigest()[:12]
@@ -78,6 +109,7 @@ def build(production=False, require_local_videos=False):
     if re.search(r'\{\{[A-Z_]+\}\}',page):raise ValueError('Unresolved template token')
     (ROOT/'index.html').write_text(page,encoding='utf-8')
     dist=ROOT/'dist';dist.mkdir(exist_ok=True)
+    write_search_files(dist,d['site_url'],production)
     for f in ('index.html','styles.css','script.js','video-player.css','video-player.js','desktop-pet.css','desktop-pet.js','sidebar.css','favicon.svg'):shutil.copyfile(ROOT/f,dist/f)
     if (ROOT/'assets').exists():shutil.copytree(ROOT/'assets',dist/'assets',dirs_exist_ok=True,ignore=shutil.ignore_patterns('originals','*original*'))
     print('Built dist/ with verified local videos.' if require_local_videos else 'Built dist/. Missing optional local videos fall back to project-hosted URLs.')

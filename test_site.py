@@ -1,11 +1,41 @@
 #!/usr/bin/env python3
 """Offline structural regression checks for V38. Standard library only."""
 import json,re,tempfile,unittest
+import xml.etree.ElementTree as ET
 from pathlib import Path
 from unittest.mock import patch
 import build
 from html.parser import HTMLParser
 ROOT=Path(__file__).resolve().parent
+class SearchTests(unittest.TestCase):
+    def test_canonical_and_profile_are_consistent(self):
+        data=json.loads((ROOT/'profile.json').read_text(encoding='utf-8'))
+        metadata=build.search_metadata(data)
+        self.assertIn('href="https://yuchenyan.me/"',metadata)
+        profile=json.loads(re.search(r'<script[^>]*>(.*?)</script>',metadata).group(1))
+        self.assertEqual(profile['url'],data['site_url'])
+        self.assertEqual(profile['mainEntity']['name'],data['name'])
+        self.assertEqual(profile['mainEntity']['url'],profile['url'])
+        data['site_url']='https://example.com/?preview=1'
+        with self.assertRaises(ValueError): build.search_metadata(data)
+
+    def test_search_files_do_not_leak_production_urls_into_preview(self):
+        with tempfile.TemporaryDirectory() as directory:
+            dist=Path(directory)
+            build.write_search_files(dist,'https://yuchenyan.me/',True)
+            urls=ET.parse(dist/'sitemap.xml').findall('.//{*}loc')
+            self.assertEqual([u.text for u in urls],['https://yuchenyan.me/'])
+            self.assertIn('Sitemap: https://yuchenyan.me/sitemap.xml',(dist/'robots.txt').read_text())
+            build.write_search_files(dist,'https://yuchenyan.me/',False)
+            self.assertEqual(ET.parse(dist/'sitemap.xml').findall('.//{*}loc'),[])
+            self.assertNotIn('Sitemap:',(dist/'robots.txt').read_text())
+
+    def test_built_search_files_match_indexing_mode(self):
+        page=(ROOT/'dist/index.html').read_text(encoding='utf-8')
+        urls=ET.parse(ROOT/'dist/sitemap.xml').findall('.//{*}loc')
+        self.assertEqual(len(urls),0 if 'noindex' in page else 1)
+        self.assertIn('Allow: /',(ROOT/'dist/robots.txt').read_text())
+
 class SiteTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls):

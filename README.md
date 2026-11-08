@@ -43,12 +43,13 @@ Open http://localhost:8000 in your browser.
 
 Pushing to `main` runs `.github/workflows/pages.yml`: check out real LFS files, build and validate the site, then deploy **only `dist/`** to GitHub Pages. The checked-in `index.html` is also regenerated for direct previews. Python 3.12 is configured in the workflow.
 
-1. Verify the biography, publications, links, and images.
-2. In `profile.json`, set `content_confirmed` to `true` only after reviewing the content.
-3. Run `python build.py --production` to create the production build.
-4. Update the workflow build command to include `--production --require-local-videos` when the content is ready for indexing.
+The public site is **https://yuchenyan.me/**. The owner authorized opening the current site to search engines after connecting the domain and enabling HTTPS. The workflow now builds with `--production --require-local-videos`; this removes the preview-only `noindex` tag.
 
-**Important:** the current source contains a `noindex, nofollow` robots meta tag while content is unconfirmed. Do not treat an accessible preview as a finalized public launch.
+`profile.json` holds `site_url` and an optional `google_site_verification` token. The build generates the canonical URL, social sharing metadata, Person/ProfilePage structured data, `dist/robots.txt`, and `dist/sitemap.xml`. The sitemap contains only the canonical homepage; section anchors are not separate pages. Preview builds retain `noindex` and overwrite the sitemap with an empty URL set.
+
+To reproduce the deployment locally, run `python build.py --production --require-local-videos` followed by `python test_site.py`. Keep the custom domain configured in GitHub Pages settings (this site deploys through Actions).
+
+For Google Search Console, verify the URL-prefix property `https://yuchenyan.me/` using the owner's HTML verification token, submit `https://yuchenyan.me/sitemap.xml`, and request indexing of the homepage. Verification and indexing requests require the owner's Google session; deploying this configuration alone does not confirm Google indexing.
 
 ## Research videos
 

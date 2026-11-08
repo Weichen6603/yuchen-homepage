@@ -32,7 +32,7 @@ jobs:
       - name: Verify and build static site with real video files
         run: |
           git lfs fsck
-          python build.py --require-local-videos
+          python build.py --production --require-local-videos
           python test_site.py
       - name: Configure Pages
         uses: actions/configure-pages@v5
