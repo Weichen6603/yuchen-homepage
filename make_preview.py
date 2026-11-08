@@ -15,17 +15,21 @@ def make_preview():
         return '<style>\n'+(ROOT/name).read_text(encoding='utf-8')+'\n</style>'
     page=re.sub(r'<link rel="stylesheet" href="([^\"]+)"\s*/?>',stylesheet,page)
     def javascript(m):
-        return '<script>\n'+(ROOT/m.group(1)).read_text(encoding='utf-8')+'\n</script>'
+        return '<script>\n'+(ROOT/m.group(1).split('?',1)[0]).read_text(encoding='utf-8')+'\n</script>'
     page=re.sub(r'<script src="([^\"]+)"[^>]*>\s*</script>',javascript,page)
     data=json.loads((ROOT/'profile.json').read_text(encoding='utf-8'))
     ordered=[p for p in data['projects'] if p.get('category')=='publication']+[p for p in data['projects'] if p.get('category','project')=='project']
     n=[0]
     def video(m):
         p=ordered[n[0]];n[0]+=1
-        name=html.escape(p['name'],quote=True);url=html.escape(p['video_url'],quote=True)
+        name=html.escape(p['name'],quote=True);url=html.escape('https://weichen6603.github.io/yuchen-homepage/'+p['local_video'],quote=True)
         poster=html.escape(p['poster'],quote=True)
         return f'<a class="preview-film" href="{url}" target="_blank" rel="noopener noreferrer" aria-label="Watch {name} demo"><img src="{poster}" alt="{name} demo poster" loading="lazy" width="640" height="360"><span aria-hidden="true">▶ Watch demo</span></a>'
-    page=re.sub(r'<video\b[^>]*>.*?</video>',video,page,flags=re.S)
+    page=re.sub(r'<dialog class="film-dialog".*?</dialog>','',page,flags=re.S)
+    page=re.sub(r'<button class="film-trigger".*?</button>',video,page,flags=re.S)
+    page=re.sub(r'<button class="film-preview-toggle".*?</button>','<span>Project film</span>',page,flags=re.S)
+    for p in ordered:
+        page=page.replace('href="'+p['local_video']+'"','href="https://weichen6603.github.io/yuchen-homepage/'+p['local_video']+'"')
     page=re.sub(r'<p class="video-status"[^>]*>.*?</p>','',page,flags=re.S)
     page=page.replace('Project film · click to play','Project film · opens externally')
     page=page.replace('</head>','''<style>

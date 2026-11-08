@@ -20,15 +20,6 @@ document.addEventListener('click', event => {
 });
 window.matchMedia('(min-width: 651px)').addEventListener('change', event => { if (event.matches) closeMenu(); });
 window.addEventListener('hashchange', () => closeMenu());
-// Keep playback intentional and avoid two films playing simultaneously.
-document.querySelectorAll('video').forEach(video => {
-  video.addEventListener('play', () => {
-    document.querySelectorAll('video').forEach(other => { if (other !== video) other.pause(); });
-  });
-  const showError = () => { video.closest('figure').querySelector('.video-status').hidden = false; };
-  video.addEventListener('error', showError);
-  video.querySelectorAll('source').forEach(source => source.addEventListener('error', showError));
-});
 
 // Progressive enhancement: reading progress and section navigation.
 const progressBar = document.getElementById('scroll-progress-bar');

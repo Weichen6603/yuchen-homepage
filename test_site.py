@@ -4,6 +4,7 @@ import json,re,tempfile,unittest
 from pathlib import Path
 from unittest.mock import patch
 import build
+from html.parser import HTMLParser
 ROOT=Path(__file__).resolve().parent
 class SiteTests(unittest.TestCase):
     @classmethod
@@ -50,6 +51,30 @@ class SiteTests(unittest.TestCase):
         self.assertIsNone(re.search(r'\{\{[A-Z_]+\}\}',self.page))
 
 class VideoBuildTests(unittest.TestCase):
+    def test_previews_and_modal_have_separate_playback_controls(self):
+        class Elements(HTMLParser):
+            def __init__(self):
+                super().__init__(); self.tags=[]
+            def handle_starttag(self, tag, attrs):
+                self.tags.append((tag,dict(attrs)))
+        parser=Elements()
+        parser.feed((ROOT/'index.html').read_text(encoding='utf-8'))
+        previews=[attrs for tag,attrs in parser.tags if tag=='video' and attrs.get('class')=='film-preview']
+        self.assertEqual(len(previews),3)
+        for attrs in previews:
+            for flag in ('muted','loop','playsinline'): self.assertIn(flag,attrs)
+            self.assertNotIn('controls',attrs)
+            self.assertEqual(attrs['preload'],'none')
+        players=[attrs for tag,attrs in parser.tags if tag=='video' and attrs.get('id')=='film-player']
+        self.assertEqual(len(players),1)
+        self.assertIn('controls',players[0])
+        self.assertNotIn('src',players[0])
+        triggers=[attrs for tag,attrs in parser.tags if tag=='button' and attrs.get('class')=='film-trigger']
+        self.assertEqual(len(triggers),3)
+        for attrs in triggers:
+            self.assertEqual(attrs['aria-controls'],'film-dialog')
+            self.assertTrue((ROOT/attrs['data-film-src']).is_file())
+
     def test_deployment_rejects_missing_video_and_lfs_pointer(self):
         with tempfile.TemporaryDirectory() as directory, patch.object(build, 'ROOT', Path(directory)):
             local = 'assets/videos/Example.mp4'

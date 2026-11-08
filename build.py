@@ -50,7 +50,16 @@ def build(production=False, require_local_videos=False):
         target=featured if p.get('category')=='publication' else projects
         item_num=(len(featured)+1) if p.get('category')=='publication' else (len(projects)+1)
         item_label='PAPER' if p.get('category')=='publication' else 'PROJECT'
-        target.append(f'''<article class="project { "featured-paper" if p.get("category")=="publication" else "compact-project" }" id="project-{i+1}"><div class="project-layout"><div class="project-copy"><div class="project-topline"><span class="project-index">{item_label} {item_num:02d}</span><span>{esc(p['year'])}</span><span class="tag">{esc(p['venue'])}</span></div><h3><a href="{project_url}" target="_blank" rel="noopener noreferrer">{esc(p['name'])}</a></h3><p class="project-description">{esc(p['subtitle'])}</p><p class="project-description">{esc(p['description'])}</p><div class="project-links">{links(p['links'])}</div><p class="verification-note">{esc(p.get('link_note',''))}</p><p class="authors" aria-label="Project authors">{authors(p['authors'])}</p></div><figure class="project-media"><video id="video-{i+1}" controls playsinline preload="none" poster="{poster}" aria-label="{esc(p['name'])} promotional video"><source src="{video}" type="video/mp4">Your browser cannot play this video. <a href="{video}">Open the video</a>.</video><figcaption><span>Project film · play here</span><a href="{video}" target="_blank" rel="noopener noreferrer">Open video</a></figcaption><p class="video-status" hidden>Video unavailable here. Use “Open video” or visit the project page.</p></figure></div></article>''')
+        target.append(f'''<article class="project { "featured-paper" if p.get("category")=="publication" else "compact-project" }" id="project-{i+1}"><div class="project-layout"><div class="project-copy"><div class="project-topline"><span class="project-index">{item_label} {item_num:02d}</span><span>{esc(p['year'])}</span><span class="tag">{esc(p['venue'])}</span></div><h3><a href="{project_url}" target="_blank" rel="noopener noreferrer">{esc(p['name'])}</a></h3><p class="project-description">{esc(p['subtitle'])}</p><p class="project-description">{esc(p['description'])}</p><div class="project-links">{links(p['links'])}</div><p class="verification-note">{esc(p.get('link_note',''))}</p><p class="authors" aria-label="Project authors">{authors(p['authors'])}</p></div><figure class="project-media film-card">
+<button class="film-trigger" type="button" aria-label="Watch {esc(p['name'])} demo" aria-haspopup="dialog" aria-controls="film-dialog" data-film-title="{esc(p['name'])}" data-film-src="{video}">
+<video class="film-preview" id="video-{i+1}" muted loop playsinline preload="none" poster="{poster}" tabindex="-1" aria-hidden="true"><source src="{video}" type="video/mp4"></video>
+<span class="film-shade" aria-hidden="true"></span><span class="film-play" aria-hidden="true">▶</span>
+<span class="film-watch" aria-hidden="true"><span>▶</span> WATCH DEMO <span class="film-watch-arrow">↗</span></span>
+<span class="film-preview-label" aria-hidden="true">SILENT PREVIEW</span>
+</button>
+<figcaption><button class="film-preview-toggle" type="button" aria-label="Play {esc(p['name'])} preview" aria-controls="video-{i+1}">Play preview</button><a href="{video}" target="_blank" rel="noopener noreferrer">Open video</a></figcaption>
+<p class="video-status" hidden>Preview unavailable. Select Watch demo or open the video.</p>
+</figure></div></article>''')
     pubs=[]
     for p in d['publications']:
         for key in ('title','authors','venue','year'):
@@ -62,12 +71,14 @@ def build(production=False, require_local_videos=False):
     contact=f'<a href="mailto:{esc(email)}">{esc(email)}</a>' if email else '<span class="contact-pending">Public contact details will be added shortly.</span>'
     tokens={'ROBOTS':'' if production else '<meta name="robots" content="noindex, nofollow" />','DRAFT_NOTICE':'','DESKTOP_PET':(ROOT/'templates/little-pet.html').read_text(encoding='utf-8'),'ROLE':esc(d.get('role','AI Research')).replace('Aether AI','<a class="profile-affiliation" href="https://aetherlabs.ai/" target="_blank" rel="noopener noreferrer">Aether AI</a>'),'LOCATION':esc(d.get('location','')),'SOCIALS':social,'CV':cv,'PROJECTS':''.join(projects),'FEATURED_PUBLICATIONS':''.join(featured),'PUBLICATIONS':''.join(pubs),'CONTACT':contact,'EMAIL':esc(email)}
     tokens['STYLE_VERSION']=hashlib.sha256((ROOT/'styles.css').read_text(encoding='utf-8').encode('utf-8')).hexdigest()[:12]
+    for token, filename in [('SCRIPT_VERSION','script.js'),('PLAYER_STYLE_VERSION','video-player.css'),('PLAYER_SCRIPT_VERSION','video-player.js')]:
+        tokens[token]=hashlib.sha256((ROOT/filename).read_text(encoding='utf-8').encode('utf-8')).hexdigest()[:12]
     page=(ROOT/'templates/index.html').read_text(encoding='utf-8')
     for k,v in tokens.items():page=page.replace('{{'+k+'}}',v)
     if re.search(r'\{\{[A-Z_]+\}\}',page):raise ValueError('Unresolved template token')
     (ROOT/'index.html').write_text(page,encoding='utf-8')
     dist=ROOT/'dist';dist.mkdir(exist_ok=True)
-    for f in ('index.html','styles.css','script.js','desktop-pet.css','desktop-pet.js','sidebar.css','favicon.svg'):shutil.copyfile(ROOT/f,dist/f)
+    for f in ('index.html','styles.css','script.js','video-player.css','video-player.js','desktop-pet.css','desktop-pet.js','sidebar.css','favicon.svg'):shutil.copyfile(ROOT/f,dist/f)
     if (ROOT/'assets').exists():shutil.copytree(ROOT/'assets',dist/'assets',dirs_exist_ok=True,ignore=shutil.ignore_patterns('originals','*original*'))
     print('Built dist/ with verified local videos.' if require_local_videos else 'Built dist/. Missing optional local videos fall back to project-hosted URLs.')
 if __name__=='__main__':

@@ -14,6 +14,7 @@
 <link rel="stylesheet" href="styles.css?v={{STYLE_VERSION}}" />
 <link rel="stylesheet" href="sidebar.css" />
 <link rel="stylesheet" href="desktop-pet.css" />
+<link rel="stylesheet" href="video-player.css?v={{PLAYER_STYLE_VERSION}}" />
 </head>
 <body>
 <a class="skip-link" href="#home">Skip to content</a>
@@ -45,7 +46,24 @@
 </main>
 </div>
 {{DRAFT_NOTICE}}
-<script src="script.js"></script>
+<dialog class="film-dialog" id="film-dialog" aria-labelledby="film-title" aria-describedby="film-hint">
+  <div class="film-panel">
+    <header class="film-header">
+      <div><p class="film-eyebrow"><span></span> RESEARCH IN MOTION</p><h2 id="film-title">Research film</h2></div>
+      <button class="film-close" type="button" aria-label="Close video" autofocus>×</button>
+    </header>
+    <div class="film-screen">
+      <video id="film-player" controls playsinline preload="none" aria-label="Research film player"></video>
+      <span class="film-scan" aria-hidden="true"></span>
+      <i class="film-corner film-corner-tl" aria-hidden="true"></i><i class="film-corner film-corner-tr" aria-hidden="true"></i>
+      <i class="film-corner film-corner-bl" aria-hidden="true"></i><i class="film-corner film-corner-br" aria-hidden="true"></i>
+    </div>
+    <footer class="film-footer"><span id="film-hint">Sound on · Esc to close</span><a id="film-direct" target="_blank" rel="noopener noreferrer">Open video ↗</a></footer>
+    <p class="film-error" role="status" hidden>Unable to play here. Try the player controls or open the video directly.</p>
+  </div>
+</dialog>
+<script src="script.js?v={{SCRIPT_VERSION}}"></script>
+<script src="video-player.js?v={{PLAYER_SCRIPT_VERSION}}" defer></script>
 {{DESKTOP_PET}}
 <script src="desktop-pet.js" defer></script>
 </body>
