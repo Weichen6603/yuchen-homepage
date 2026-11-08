@@ -11,7 +11,7 @@ def data_url(path):
 def make_preview():
     page=(ROOT/'index.html').read_text(encoding='utf-8')
     def stylesheet(m):
-        name=m.group(1)
+        name=m.group(1).split('?',1)[0]
         return '<style>\n'+(ROOT/name).read_text(encoding='utf-8')+'\n</style>'
     page=re.sub(r'<link rel="stylesheet" href="([^\"]+)"\s*/?>',stylesheet,page)
     def javascript(m):

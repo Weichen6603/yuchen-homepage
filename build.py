@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """Static academic homepage builder; standard library, no dependencies."""
-import argparse,base64,html,json,mimetypes,re,shutil
+import argparse,base64,hashlib,html,json,mimetypes,re,shutil
 from pathlib import Path
 from urllib.parse import urlparse,quote
 ROOT=Path(__file__).resolve().parent
@@ -61,6 +61,7 @@ def build(production=False, require_local_videos=False):
     if email and not re.fullmatch(r'[A-Za-z0-9._+%-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}',email):raise ValueError('Invalid email address')
     contact=f'<a href="mailto:{esc(email)}">{esc(email)}</a>' if email else '<span class="contact-pending">Public contact details will be added shortly.</span>'
     tokens={'ROBOTS':'' if production else '<meta name="robots" content="noindex, nofollow" />','DRAFT_NOTICE':'','DESKTOP_PET':(ROOT/'templates/little-pet.html').read_text(encoding='utf-8'),'ROLE':esc(d.get('role','AI Research')).replace('Aether AI','<a class="profile-affiliation" href="https://aetherlabs.ai/" target="_blank" rel="noopener noreferrer">Aether AI</a>'),'LOCATION':esc(d.get('location','')),'SOCIALS':social,'CV':cv,'PROJECTS':''.join(projects),'FEATURED_PUBLICATIONS':''.join(featured),'PUBLICATIONS':''.join(pubs),'CONTACT':contact,'EMAIL':esc(email)}
+    tokens['STYLE_VERSION']=hashlib.sha256((ROOT/'styles.css').read_text(encoding='utf-8').encode('utf-8')).hexdigest()[:12]
     page=(ROOT/'templates/index.html').read_text(encoding='utf-8')
     for k,v in tokens.items():page=page.replace('{{'+k+'}}',v)
     if re.search(r'\{\{[A-Z_]+\}\}',page):raise ValueError('Unresolved template token')
