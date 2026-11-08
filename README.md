@@ -1,55 +1,65 @@
-# Yuchen Yan — V38 / Aligned Sidebar & Lower Pet
+# Yuchen Yan — Personal Academic Homepage (V41)
 
-本版以 V37 为基础，仅修正侧栏整体左对齐和小人的垂直位置。头像、五张摄影（5 秒轮播）、简介、News、六篇论文、CRIS-0、Aether AI 链接、传送门与夹爪动画及捉虫功能均保留。
+Personal research homepage of **Yuchen Yan**, Research Scientist at [Aether AI](https://aetherlabs.ai/).
 
-## 打开并查看
+## Current version
 
-打开 `index.html` 后，先主动向下滚动。累计实际滚动约 80px 且小人的落点进入可视区域后，播放一次约 2.8 秒的登场：传送门打开 → Q 版夹爪托住小人向下降 → 软垫夹指打开 → 夹爪收回 → 传送门关闭。落地后恢复原来的挥枪待机。
+**V41** is the current website source in this repository. The older V38 title in the previous README described an earlier layout iteration; it was not the current release label.
 
-页面初次打开时没有小人、对话或虫子；页面加载、浏览器恢复滚动位置，以及单纯程序滚动不算邀请。后续滚动不会反复播放；每次重新加载页面可再次体验。没有音频、统计、远程请求或行为数据存储。
+- Minimal white-and-black academic layout with SF Pro–preferred typography (system fallback on Windows/Linux).
+- Five-photo personal photography carousel.
+- Profile sidebar with aligned name, affiliation, location, and contact links.
+- About, News, Publications, and Projects sections.
+- Research video preview cards with inline video playback where supported; video assets are not yet committed.
+- Scroll-triggered Little Yuchen character, portal/gripper entrance, and optional Bug Hunt interaction.
 
-小人仍需点击后才显示 Bug Hunt 对话，用户确认后才生成虫子。支持完整捉虫、重玩、Esc 结束、隐藏与页脚唤醒。用户开启系统“减少动态效果”时，小人直接出现，不播放传送或夹爪位移动画。
+## Repository structure
 
-## 对齐与位置
+- `index.html`: generated static homepage
+- `templates/`: source templates
+- `profile.json`: research content and publication metadata
+- `styles.css`, `sidebar.css`, `desktop-pet.css`: styles
+- `script.js`, `desktop-pet.js`: interactions
+- `assets/`: photography, portrait, and character assets
+- `build.py`: generate site and deployable `dist/`
+- `make_preview.py`: standalone offline preview
+- `test_site.py`: static validation
 
-- 头像、姓名、职位、位置行和三条联系方式的**外沿**共用同一条左边界；不再使用负边距把图标悬挂到头像左侧。
-- 地址与联系方式内部统一为 20px 图标列 + 10px 间隔 + 文字列，因此四行文字也相互对齐。
-- Aether AI 保留官网链接，打开新标签页，并设置 `noopener noreferrer`。
-- 小人水平方向依然按头像列居中。桌面端根据 LinkedIn 行底部与视口底部之间的可用空白计算落点，不再使用固定 44px 的上间隔。1586×960 窗口中相较 V37 下移约 84px；不同窗口高度会自动调整。
-- 短屏优先保持角色及游戏计数可达；手机端保持正常文档流，资料堆叠排列并沿同一左边界对齐，不覆盖正文。
-- 提前预留完整落点空间，登场不推动正文。可见性检测只检查传送门与实际落点，不要求空白间距全部处于屏幕内。
+## Local development
 
-## 文件与构建
+Requires Python 3.12+ for the project build scripts.
 
-已生成的 `index.html` 无需构建即可使用，保留同目录 CSS、JS 和 `assets/`。构建脚本要求 Python 3.12 或更新版本，仅使用标准库：
-
-```sh
+```powershell
 python build.py
-python make_preview.py
 python test_site.py
 python -m http.server 8000
 ```
 
-`dist/` 是可上传至静态网站托管的文件。生成的单文件预览 `yuchen-homepage-preview.html` 内嵌图片、CSS、JS，不内嵌 MP4；研究视频以封面链接打开外部项目视频。完整版 HTML 的视频播放器优先使用存在的本地 MP4，否则回退到原项目 URL。本次不核验远程视频的可播放性。
+Open http://localhost:8000 in your browser.
 
-`profile.json` 中 `content_confirmed` 保持原来的 `false`，预览保留 noindex，未替你确认论文、履历或购买/绑定域名。正式上线前确认内容并设置 `content_confirmed: true`，再执行 `python build.py --production`。
+## Publishing
 
-### 维护入口
+The repository contains a ready-to-view `index.html`, but production publication is a separate step.
 
-- `sidebar.css`：唯一的侧栏布局定义，已清理 `styles.css` 中累积的旧侧栏规则。
-- `templates/little-pet.html`：小人、气泡、HUD 与内联 SVG 夹爪。
-- `desktop-pet.css`：传送门、软垫夹爪、同步下降、松爪和收回动画；动画不需要外部库。
-- `desktop-pet.js`：真实滚动识别、单次登场、对话、游戏和可访问性。
-- `tests/arrival_test.py`：Playwright + Chromium 登场与完整捉虫回归测试（测试依赖需单独安装）。
-- `tests/layout_test.py`：八组屏幕尺寸的边界、文字列、落点居中与截图检查。
-- `BROWSER-TEST-RESULTS.json` 和 `BROWSER-LAYOUT-RESULTS.json`：本轮实际浏览器测试结果。
+1. Verify the biography, publications, links, and images.
+2. In `profile.json`, set `content_confirmed` to `true` only after reviewing the content.
+3. Run `python build.py --production` to create the production build.
+4. Deploy the generated static files to GitHub Pages, ensuring the root URL and relative asset paths work.
 
-原始摄影、个人头像和童年照片保留在源码的 `assets/` 中。发布目录会排除 `originals/` 及名称含 `original` 的图片。源码不包含字体文件。
+**Important:** the current source contains a `noindex, nofollow` robots meta tag while content is unconfirmed. Do not treat an accessible preview as a finalized public launch.
 
-## 测试边界
+## Research videos
 
-测试通过 set_content 将自包含预览载入实际 Chromium 渲染器，使用可信鼠标滚轮、键盘、触摸输入；覆盖首次与重复滚动、降低动态效果、尺寸和对齐、完整游戏、避让正文和链接。具体尺寸、用例与结果见 JSON 报告。网页截图来自浏览器，不是生成式效果图。
+The original MP4 files remain on the owner's computer and are not yet in the repository:
 
-未进行 Safari / Firefox 实机验证；未验证所有缩放倍率、外部服务或线上部署。
+| File | Local size | Suggested next step |
+| --- | ---: | --- |
+| `video2world.mp4` | 18.7 MB | Browser-ready MP4 in regular Git |
+| `robotagentbench.mp4` | 31.1 MB | Browser-ready MP4 in regular Git |
+| `cris0.mp4` | 98.4 MB | Compress a web playback copy before committing |
 
-环境禁止浏览器直接导航到本地 file:// 路径，因此部署目录的直接导航测试未完成。多文件资源已做静态存在性检查；这不等于线上部署验证。
+For browser playback, prefer H.264/AAC MP4 with `-movflags +faststart`. Avoid using a Git LFS pointer URL as an HTML `<video>` source. The large original files may be archived separately.
+
+## Source of truth
+
+This GitHub repository is the canonical website source. ChatGPT Space is a project index/archive, not a second independent source tree.
